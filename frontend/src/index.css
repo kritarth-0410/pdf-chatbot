@@ -1,0 +1,279 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@100,200,300,400,500,700,800,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root,
+.App {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system,
+        BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+}
+
+code,
+pre,
+.mono {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+.font-display {
+    font-family:
+        "Cabinet Grotesk", "IBM Plex Sans", ui-sans-serif, system-ui,
+        sans-serif;
+    letter-spacing: -0.02em;
+}
+
+@layer base {
+    :root {
+        /* Swiss & High-Contrast — Light */
+        --background: 220 14% 97%; /* #F9FAFB */
+        --foreground: 0 0% 4%; /* #0A0A0A */
+        --surface: 0 0% 100%;
+        --card: 0 0% 100%;
+        --card-foreground: 0 0% 4%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 0 0% 4%;
+        --primary: 224 100% 33%; /* #002FA7 klein blue */
+        --primary-foreground: 0 0% 100%;
+        --secondary: 220 14% 96%;
+        --secondary-foreground: 0 0% 4%;
+        --muted: 220 14% 96%;
+        --muted-foreground: 240 4% 40%;
+        --accent: 224 100% 33%;
+        --accent-foreground: 0 0% 100%;
+        --destructive: 0 72% 51%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 220 13% 91%;
+        --input: 220 13% 91%;
+        --ring: 224 100% 33%;
+        --radius: 4px;
+    }
+
+    .dark {
+        /* Swiss & High-Contrast — Dark */
+        --background: 240 10% 4%; /* #09090B */
+        --foreground: 0 0% 98%;
+        --surface: 232 21% 9%; /* #12141D */
+        --card: 232 21% 9%;
+        --card-foreground: 0 0% 98%;
+        --popover: 232 21% 9%;
+        --popover-foreground: 0 0% 98%;
+        --primary: 217 91% 60%; /* #3B82F6 */
+        --primary-foreground: 0 0% 100%;
+        --secondary: 240 4% 11%;
+        --secondary-foreground: 0 0% 98%;
+        --muted: 240 4% 11%;
+        --muted-foreground: 240 5% 65%;
+        --accent: 217 91% 60%;
+        --accent-foreground: 0 0% 100%;
+        --destructive: 0 62% 45%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 4% 16%; /* #27272A */
+        --input: 240 4% 16%;
+        --ring: 217 91% 60%;
+    }
+}
+
+@layer base {
+    * {
+        border-color: hsl(var(--border));
+    }
+}
+
+/* Sidebar surface */
+.bg-surface {
+    background-color: hsl(var(--surface));
+}
+
+/* Focus ring */
+.focus-ring:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+}
+
+/* Scrollbar minimal */
+.scroll-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+.scroll-thin::-webkit-scrollbar-track {
+    background: transparent;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 8px;
+}
+.scroll-thin::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Grain overlay for the empty state */
+.grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.02 0 0 0 0 0.02 0 0 0 0 0.02 0 0 0 0.4 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.35;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+}
+
+/* Cursor animation for streaming text */
+@keyframes blink {
+    0%,
+    50% {
+        opacity: 1;
+    }
+    50.01%,
+    100% {
+        opacity: 0;
+    }
+}
+.stream-caret::after {
+    content: "▍";
+    margin-left: 2px;
+    animation: blink 1s steps(2, start) infinite;
+    color: hsl(var(--accent));
+}
+
+/* Citation chip */
+.citation-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 1px 6px;
+    margin: 0 2px;
+    border: 1px solid hsl(var(--border));
+    background: hsl(var(--secondary));
+    color: hsl(var(--foreground));
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-family: "JetBrains Mono", monospace;
+    line-height: 1.2;
+    cursor: pointer;
+    transition-property:
+        background-color, color, border-color, transform;
+    transition-duration: 120ms;
+}
+.citation-chip:hover {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+    border-color: hsl(var(--accent));
+}
+
+/* Assistant markdown */
+.md-body p {
+    margin: 0 0 0.75rem;
+    line-height: 1.65;
+}
+.md-body ul,
+.md-body ol {
+    margin: 0 0 0.75rem 1.25rem;
+}
+.md-body ul {
+    list-style: disc;
+}
+.md-body ol {
+    list-style: decimal;
+}
+.md-body li {
+    margin-bottom: 0.25rem;
+    line-height: 1.6;
+}
+.md-body h1,
+.md-body h2,
+.md-body h3 {
+    font-family: "Cabinet Grotesk", "IBM Plex Sans", sans-serif;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    margin: 1rem 0 0.5rem;
+    color: hsl(var(--foreground));
+}
+.md-body h1 {
+    font-size: 1.25rem;
+}
+.md-body h2 {
+    font-size: 1.125rem;
+}
+.md-body h3 {
+    font-size: 1rem;
+}
+.md-body code {
+    background: hsl(var(--muted));
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+.md-body pre {
+    background: hsl(var(--muted));
+    padding: 12px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin-bottom: 0.75rem;
+}
+.md-body table {
+    border-collapse: collapse;
+    margin-bottom: 0.75rem;
+    font-size: 0.9em;
+}
+.md-body th,
+.md-body td {
+    border: 1px solid hsl(var(--border));
+    padding: 6px 10px;
+    text-align: left;
+}
+.md-body strong {
+    font-weight: 600;
+    color: hsl(var(--foreground));
+}
+
+/* Highlighted PDF page indicator */
+.pdf-highlight {
+    box-shadow: 0 0 0 3px hsl(var(--accent) / 0.65);
+    transition: box-shadow 0.6s ease;
+}
+
+/* Panel resize handle */
+[data-panel-resize-handle-enabled] {
+    background: transparent;
+    position: relative;
+    width: 4px;
+    transition: background-color 120ms ease;
+}
+[data-panel-resize-handle-enabled]:hover,
+[data-panel-resize-handle-enabled][data-resize-handle-active] {
+    background: hsl(var(--accent) / 0.35);
+}
+
+/* Drag over state */
+.drop-active {
+    background: hsl(var(--accent) / 0.08);
+    border-color: hsl(var(--accent));
+}
+
+/* Reveal animation */
+@keyframes reveal {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.reveal {
+    animation: reveal 260ms ease both;
+}

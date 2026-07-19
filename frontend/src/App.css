@@ -1,0 +1,4 @@
+/* Reset previous App styles — everything lives in tailwind + index.css. */
+.App {
+    height: 100%;
+}

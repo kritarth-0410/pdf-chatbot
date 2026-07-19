@@ -1,0 +1,110 @@
+{
+  "theme_strategy": {
+    "archetype": "Swiss & High-Contrast (Authority, Clarity, Truth)",
+    "description": "Objective, rigid, and functional. Calm density optimized for document reading and AI augmentation. High-contrast monochromatic base with highly distinct accent colors.",
+    "mode": "Both Light and Dark Mode Supported"
+  },
+  "colors": {
+    "light_mode": {
+      "background": "#F9FAFB",
+      "surface": "#FFFFFF",
+      "border": "#E5E7EB",
+      "text_primary": "#0A0A0A",
+      "text_secondary": "#52525B",
+      "accent": "#002FA7",
+      "accent_hover": "#001D6E"
+    },
+    "dark_mode": {
+      "background": "#09090B",
+      "surface": "#12141D",
+      "border": "#27272A",
+      "text_primary": "#FAFAFA",
+      "text_secondary": "#A1A1AA",
+      "accent": "#3B82F6",
+      "accent_hover": "#60A5FA"
+    }
+  },
+  "typography": {
+    "headings": "Cabinet Grotesk",
+    "body": "IBM Plex Sans",
+    "monospace": "JetBrains Mono",
+    "instructions": "NEVER use Inter for headings. Use tight letter spacing (tracking-tight) for large headings. Use font-light or font-black, avoiding generic bold."
+  },
+  "layouts": {
+    "overall_structure": "100vh Unified Application Workspace. No global scrolling. Split-screen architecture using react-resizable-panels.",
+    "sidebar": "Left panel, 260px-300px wide. Houses 'PDF Library' (drag-drop, folders) and 'Chat History'. Dense layout, gap-1 or gap-2.",
+    "main_workspace": "Split-screen. Left: PDF Viewer. Right: AI Chat Panel.",
+    "chat_panel": "Streaming-first layout. Messages should use block layouts with step-trace accordions for AI reasoning.",
+    "spacing": "Tight (p-2, p-4) in sidebars and toolbars. Generous (p-8, p-12) in the PDF reading area."
+  },
+  "grids": {
+    "mode": "High Density Grid (For Dashboards/Analytics)",
+    "rules": "Utilize grid-cols-1 md:grid-cols-4. Every pixel utilized with full height stretching. No jagged bottoms in sidebars."
+  },
+  "visual_enhancers": {
+    "surfaces": "Grid Borders: expose the skeleton of the workspace with 1px subtle borders (border-r, border-b) separating panels. Use Flat Solid surfaces, no glassmorphism in reading areas.",
+    "citations": "Interactive chips inside text (e.g., [Page 4]). Must have clear hover states with contrast change. Click triggers scroll+highlight in PDF viewer.",
+    "shadows": "Minimal. Rely on 1px borders instead of drop shadows to maintain the Swiss aesthetic."
+  },
+  "motion": {
+    "animations": "Typewriter effect for AI streaming. Smooth accordion for AI 'thinking' traces. Staggered list entrance for PDF files.",
+    "interactions": "Hover states must explicitly alter text or bg color. Clicking citations smoothly scrolls PDF viewer."
+  },
+  "accessibility": {
+    "contrast": "Minimum 4.5:1 for normal text. Avoid pure black/white.",
+    "focus": "focus:ring-2 focus:ring-accent focus:outline-none.",
+    "testing": "All interactive elements MUST include a data-testid attribute (e.g., data-testid='pdf-upload-zone')."
+  },
+  "media": {
+    "image_urls": [
+      {
+        "category": "empty_state_documents",
+        "url": "https://images.pexels.com/photos/8947696/pexels-photo-8947696.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Cardboard folder by a window, use for 'No PDFs uploaded yet' empty state in the library/workspace."
+      },
+      {
+        "category": "user_avatar",
+        "url": "https://images.pexels.com/photos/35839965/pexels-photo-35839965.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Professional user avatar for the bottom of the sidebar profile section."
+      }
+    ],
+    "icons": "lucide-react. Do not use emojis."
+  },
+  "3d_libraries": {
+    "status": "Not required",
+    "reasoning": "A highly functional PDF/Document reading tool requires 2D clarity over 3D immersion."
+  },
+  "components": [
+    {
+      "component_name": "Sidebar",
+      "component_path": "/app/frontend/src/components/Sidebar.js",
+      "instructions": "Collapsible file explorer tree with drag-and-drop zones. Include 'New Chat' button."
+    },
+    {
+      "component_name": "Workspace",
+      "component_path": "/app/frontend/src/components/Workspace.js",
+      "instructions": "Use react-resizable-panels for Split-screen: PDFViewer on left, ChatPanel on right."
+    },
+    {
+      "component_name": "ChatPanel",
+      "component_path": "/app/frontend/src/components/ChatPanel.js",
+      "instructions": "Input field locked to bottom. Message history above. Implement citation chips as clickable inline buttons."
+    }
+  ],
+  "instructions_to_main_agent": [
+    "Build the application using standard React (.js/.jsx) with TailwindCSS. Do not use TypeScript.",
+    "Implement the layout with react-resizable-panels to achieve the 2026 AI workspace split-screen standard.",
+    "Use sonner for all toast notifications (uploading, success, errors).",
+    "Ensure dark mode toggle is present in the sidebar/header.",
+    "Ensure the PDF viewer allows highlighting text spans when a citation in the chat is clicked."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Do NOT apply universal transition (transition: all). This breaks transforms. Use specific transitions.",
+    "Do NOT center align the app container in CSS (no text-align: center on body or .App).",
+    "Always use modern button styles (max 4px border radius for this Swiss theme, not full pill).",
+    "NEVER use AI assistant emojis (robot, brain, lightbulb) for icons. Use lucide-react icons strictly.",
+    "Use 2-3x more spacing in the reading/chat views, but keep file lists dense.",
+    "All interactive and key informational elements MUST include a data-testid attribute.",
+    "Do NOT use complete transparent backgrounds for any container with text (headers, dropdowns). ALWAYS use solid or heavily blurred glassmorphism."
+  ]
+}
